@@ -24,6 +24,7 @@ class App extends React.Component<AppProps, void> {
     const { todos, dispatch } = this.props;
 
     return (
+      <div>
       <div className="todoapp">
         <Header addTodo={(text: string) => dispatch(addTodo(text))} />
         <MainSection
@@ -32,7 +33,9 @@ class App extends React.Component<AppProps, void> {
             deleteTodo={(t: model.Todo) => dispatch(deleteTodo(t))}
             completeTodo={(t: model.Todo) => dispatch(completeTodo(t))}
             clearCompleted={() => dispatch(clearCompleted())}
-            completeAll={() => dispatch(completeAll())}/>
+            completeAll={() => dispatch(completeAll())}/>        
+      </div>
+      <div className="typeaheadSection"></div>
       </div>
     );
   }
