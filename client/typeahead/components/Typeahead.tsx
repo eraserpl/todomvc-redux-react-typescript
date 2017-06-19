@@ -1,30 +1,27 @@
 import * as React from 'react'
 
-export interface TypeaheadProps {};
-export default class Typeahead extends React.Component<TypeaheadProps, undefined> {
-    private items: string[] = [
-        'Ничего, что я без стука',
-        'В круге света',
-        'Элементы счастья',
-        'Пело тело',
-        'Качели',
-        'Поэзия',
-        'Охота на русских',
-        'Месяц май',
-        'Листопад',
-        'Северная сказка',
-        'Пустота',
-        'Оставайся'
-    ]
-    private currentQueryStr: string = ''
+export interface TypeaheadProps {selectItems: any[]};
+interface TypeaheadState {opened: boolean, appropriateItems: string[]};
+export default class Typeahead extends React.Component<TypeaheadProps, TypeaheadState> {
+    constructor(props: TypeaheadProps) {
+        super(props);
+        this.state = {opened: false, appropriateItems: []};
+    }
     render() {
         return <div
             className='typeahead'>
-            <TypeaheadInput onChange={} />
-            <ul>
-                <li>
-                    <div>Fortran</div>
-                </li>
+            <TypeaheadInput onChange={(qStr: string) => this.setState(
+                {
+                    opened: true,
+                    appropriateItems: this.props.selectItems.filter(item => item.indexOf(qStr) != -1)
+                }
+            )} />
+            <ul className={this.state.opened && this.state.appropriateItems.length > 0 ? 'opened' : null}>
+                {this.state.appropriateItems.map(item => (
+                    <li key={item}>
+                        <div>{item}</div>
+                    </li>
+                ))}
             </ul>
         </div>
     }
@@ -37,7 +34,12 @@ class TypeaheadInput extends React.Component<TypeaheadInputProps, undefined> {
         this.props.onChange(val);
     }
     render() {
-        return <input placeholder='please start typing...' onKeyUp={this.handleKeyUp} />
+        return <input placeholder='please start typing...' onKeyUp={this.handleKeyUp.bind(this)} />
     }
+}
+
+interface TypeaheadMenuProps {};
+class TypeaheadMenu extends React.Component<TypeaheadMenuProps, undefined> {
+    
 }
 

@@ -15,6 +15,10 @@
 
 }
 
+.typeahead > ul.opened {
+    display: block;   
+}
+
 .typeahead > ul > li {
     margin: 0;
     cursor: pointer;

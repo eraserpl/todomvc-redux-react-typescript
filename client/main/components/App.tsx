@@ -21,6 +21,20 @@ interface AppProps {
     dispatch: Dispatch<{}>;
 }
 
+const SONG_LIST: string[] = [
+    'Ничего, что я без стука',
+    'В круге света',
+    'Элементы счастья',
+    'Пело тело',
+    'Качели',
+    'Поэзия',
+    'Охота на русских',
+    'Месяц май',
+    'Листопад',
+    'Северная сказка',
+    'Пустота',
+    'Оставайся'
+]
 class App extends React.Component<AppProps, void> {
     render() {
         const {todos, dispatch} = this.props;
@@ -37,7 +51,8 @@ class App extends React.Component<AppProps, void> {
                         clearCompleted={() => dispatch(clearCompleted())}
                         completeAll={() => dispatch(completeAll())} />
                 </div>
-                <Typeahead />
+                <Typeahead selectItems={SONG_LIST} />
+                <Typeahead selectItems={SONG_LIST} />
             </div>
         );
     }
